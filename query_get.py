@@ -24,7 +24,7 @@ def on_mouse(event, x, y, flags, param):
 		width = abs(point1[0] - point2[0])
 		height = abs(point1[1] - point2[1])
 		cut_img = frame[min_y:min_y + height, min_x:min_x + width]
-		cv2.imwrite('%s.jpg'%min_x, cut_img)
+		cv2.imwrite('query/0001_c1s1_0_%s.jpg'%min_x, cut_img)
 
 if __name__ == '__main__':
 

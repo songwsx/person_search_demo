@@ -69,3 +69,9 @@ python search.py
 
 行人重识别模型采用的是[strong reid baseline](https://link.zhihu.com/?target=https%3A//github.com/michuanhaohao/reid-strong-baseline)的模型，不过为了取得更好的泛化效果，可以多数据集联合训练，得到最终权重文件。
 
+## 数据集制作
+行人重识别数据集：
+链接：https://pan.baidu.com/s/1NlOv3go2_T_mTCf8g7nFyA 
+提取码：8lr5 
+多数据集统一成market1501数据集的教程：
+https://blog.csdn.net/songwsx/article/details/102987787

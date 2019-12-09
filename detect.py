@@ -20,7 +20,7 @@ def detect(cfg,
            save_images=True):
 
     # Initialize
-    device = 'cpu' # cpu
+    device = torch_utils.select_device(force_cpu=False)
     torch.backends.cudnn.benchmark = False  # set False for reproducible results
     if os.path.exists(output):
         shutil.rmtree(output)  # 删除output文件夹，清理之前的检测结果
@@ -91,11 +91,12 @@ def detect(cfg,
 
                 # Add bbox to the image
                 label = '%s %.2f' % (classes[int(cls)], conf) # 'person 1.00'
+                # 只显示检测的人
                 if classes[int(cls)] == 'person':
                     plot_one_box(xyxy, im0, label=label, color=colors[int(cls)])
 
-        cv2.imshow('result', im0)
-        cv2.waitKey(10)
+        # cv2.imshow('result', im0)
+        # cv2.waitKey(10)
         print('Done. (%.3fs)' % (time.time() - t))
 
         if opt.webcam:  # Show live webcam
@@ -126,12 +127,12 @@ def detect(cfg,
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, default='cfg/yolov3-spp.cfg', help="模型配置文件路径")
+    parser.add_argument('--cfg', type=str, default='cfg/yolov3.cfg', help="模型配置文件路径")
     parser.add_argument('--data', type=str, default='data/coco.data', help="数据集配置文件所在路径")
-    parser.add_argument('--weights', type=str, default='weights/yolov3-spp.weights', help='模型权重文件路径')
+    parser.add_argument('--weights', type=str, default='weights/yolov3.weights', help='模型权重文件路径')
     parser.add_argument('--images', type=str, default='data/samples', help='需要进行检测的图片文件夹')
     parser.add_argument('--img-size', type=int, default=416, help='输入分辨率大小')
-    parser.add_argument('--conf-thres', type=float, default=0.1, help='物体置信度阈值')
+    parser.add_argument('--conf-thres', type=float, default=0.5, help='物体置信度阈值')
     parser.add_argument('--nms-thres', type=float, default=0.4, help='NMS阈值')
     parser.add_argument('--fourcc', type=str, default='mp4v', help='fourcc output video codec (verify ffmpeg support)')
     parser.add_argument('--output', type=str, default='output', help='检测后的图片或视频保存的路径')
